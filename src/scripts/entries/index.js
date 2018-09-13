@@ -1,20 +1,38 @@
 import * as forecasts from '../weather_data'
-const weatherData = forecasts.weatherData()
-const newWeatherData = []
 
-for(let i = 0; i < weatherData.length; i++) {
-    newWeatherData.push(weatherData[i])
+class weatherAry {
+  makeAry() {
+    const weatherData = forecasts.weatherData()
+    const newAry = []
+
+    for (let i = 0; i < weatherData.length; i++) {
+      newAry.push(weatherData[i])
+    }
+    return newAry
+  }
 }
 
-let interval
-const dataChange = ()=> {
-    let shiftData = newWeatherData.shift()
-    newWeatherData.push(shiftData)
-    console.log(newWeatherData)
+const getData = new weatherAry().makeAry()
+
+class Interval {
+  execute() {
+    const id = this.doInterval()
+    this.stopInterval(id)
+  }
+  doInterval() {
+    return setInterval(this.turnData, 2000)
+  }
+  turnData() {
+    let shiftData = getData.shift()
+
+    getData.push(shiftData)
+    console.log(getData)
+  }
+  stopInterval(id) {
+    document.getElementById('stop').addEventListener('click', () => {
+      window.clearInterval(id)
+    })
+  }
 }
 
-interval = setInterval(dataChange, 2000)
-
-document.getElementById('stop').addEventListener('click', ()=> {
-    clearInterval(interval)
-})
+new Interval().execute()
