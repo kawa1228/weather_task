@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import * as forecasts from '../weather_data'
 
 class weatherAry {
@@ -36,3 +38,9 @@ class Interval {
 }
 
 new Interval().execute()
+
+axios.get('http://localhost:8000/sample.php').then((res) => {
+  console.log(res.data)
+}).catch((err) => {
+  console.log(err)
+})
