@@ -10,7 +10,7 @@ setInterval(cid, 2000)
 
 function make() {
   axios.get(`http://localhost:8001/sample.php?city_id=${id}`).then((res) => {
-    const area = res.data.location.city
+    const area = res.data.location.prefecture
     const telop = res.data.forecasts[0].telop
     const image = res.data.forecasts[0].image.url
 
@@ -21,13 +21,8 @@ function make() {
       images: image
     })
 
-    setInterval(turn, 2000)
-    function turn() {
-      let shiftData = content.shift()
-      content.push(shiftData)
+    new display.MakeDisplay().makeElm(content[0].areas, content[0].telops, content[0].images)
 
-      new display.MakeDisplay().makeElm(content[0].areas, content[0].telops, content[0].images)
-    }
   }).catch((err) => {
     console.log(err)
   })
