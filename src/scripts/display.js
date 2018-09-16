@@ -1,7 +1,4 @@
 export class MakeDisplay {
-    constructor() {
-        console.log('makeDom!')
-    }
     makeElm(area, telop, image) {
         const img = document.createElement('img')
         img.src = image
