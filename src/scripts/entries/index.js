@@ -21,6 +21,9 @@ function make() {
       images: image
     })
 
+    let shiftData = content.shift()
+    content.push(shiftData)
+
     new display.MakeDisplay().makeElm(content[0].areas, content[0].telops, content[0].images)
 
   }).catch((err) => {
