@@ -3,14 +3,7 @@ import $ from "jquery";
 import 'slick-carousel';
 import axios from 'axios'
 
-class Test {
-
-  constructor() {
-    // Promise.then(this.putData()).then(() => this.addSlick())
-    this.putData()
-    setTimeout(() => this.addSlick(), 1000)
-  }
-
+class Weather {
   getWeather(cityId) {
     return axios.get(`http://localhost:8001/sample.php?city_id=${cityId}`).then((res) => {
       return res.data
@@ -22,14 +15,6 @@ class Test {
   putData() {
     const app = document.createElement('div')
     app.className = 'app'
-
-    // const area = 'とうきょう'
-    // const telop = 'hoge'
-    // const image = ''
-    // const tokyo = new display.MakeDisplay().makeElm(area, telop, image)
-    // const kanagawa = new display.MakeDisplay().makeElm(area, telop, image)
-    // app.appendChild(tokyo)
-    // app.appendChild(kanagawa)
 
     //東京
     this.getWeather(130010).then((res => {
@@ -50,9 +35,7 @@ class Test {
       const kanagawa = new display.MakeDisplay().makeElm(area, telop, image)
       app.appendChild(kanagawa)
     }))
-
-    const result = document.getElementById('result')
-    result.appendChild(app)
+    return app
   }
 
   addSlick() {
@@ -63,11 +46,24 @@ class Test {
       autoplay: true,
       speed: 2000
     });
+    return elem
   }
 }
-const test = new Test()
+const weather = new Weather()
 
-// test.addSlick()
-// putData()
+function process(value) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(value)
+    }, 500)
+  })
+}
 
-// Promise.resolve().then(putData()).then(addSlick())
+const result = document.getElementById('result')
+
+process(weather.putData()).then(res => {
+  result.appendChild(res)
+  return process(weather.addSlick())
+}).then(adSlick => {
+  adSlick
+})
