@@ -9,11 +9,11 @@ export class MakeDisplay {
         p.textContent = `${area}の天気は${telop}です`
 
         const div = document.createElement('div')
-        div.className = 'wrapper'
+        div.className = 'forecasts'
 
         div.appendChild(img)
         div.appendChild(p)
 
-        document.getElementById('result').appendChild(div)
+        return div
     }
 }

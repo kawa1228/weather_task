@@ -1,31 +1,30 @@
+import $ from "jquery";
+import 'slick-carousel';
 import axios from 'axios'
-import * as display from '../display'
 
-let id = 140010
-function cid() {
-  (id === 140010) ? id = 130010 : id = 140010
-  make()
+$('.weather-wrapper').slick({
+  arrows: false,
+  autoplay: true,
+  speed: 2000
+});
+
+function tokyo() {
+  getWeather(130010).then((res) => {
+    console.log(res)
+  })
 }
-setInterval(cid, 2000)
+tokyo()
 
-function make() {
-  axios.get(`http://localhost:8001/sample.php?city_id=${id}`).then((res) => {
-    const area = res.data.location.prefecture
-    const telop = res.data.forecasts[0].telop
-    const image = res.data.forecasts[0].image.url
+function kanagawa() {
+  getWeather(140010).then((res) => {
+    console.log(res)
+  })
+}
+kanagawa()
 
-    const content = []
-    content.push({
-      areas: area,
-      telops: telop,
-      images: image
-    })
-
-    let shiftData = content.shift()
-    content.push(shiftData)
-
-    new display.MakeDisplay().makeElm(content[0].areas, content[0].telops, content[0].images)
-
+function getWeather(cityId) {
+  return axios.get(`http://localhost:8001/sample.php?city_id=${cityId}`).then((res) => {
+    return res.data
   }).catch((err) => {
     console.log(err)
   })
