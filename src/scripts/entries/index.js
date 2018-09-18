@@ -1,7 +1,7 @@
 import * as makeWeather from './makeWeather'
 const weather = new makeWeather.Weather()
 
-function process(value) {
+const process = (value) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(value)
