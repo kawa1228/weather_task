@@ -1,4 +1,4 @@
-import * as display from '../display'
+import * as render from '../render'
 import $ from "jquery";
 import 'slick-carousel';
 import axios from 'axios'
@@ -11,7 +11,6 @@ class Weather {
       console.log(err)
     })
   }
-
   putData() {
     const wrapper = document.createElement('div')
     wrapper.className = 'wrapper'
@@ -22,7 +21,7 @@ class Weather {
       const telop = res.forecasts[0].telop
       const image = res.forecasts[0].image.url
 
-      const tokyo = new display.MakeDisplay().makeElm(area, telop, image)
+      const tokyo = new render.Render().makeElm(area, telop, image)
       wrapper.appendChild(tokyo)
     }))
 
@@ -32,12 +31,11 @@ class Weather {
       const telop = res.forecasts[0].telop
       const image = res.forecasts[0].image.url
 
-      const kanagawa = new display.MakeDisplay().makeElm(area, telop, image)
+      const kanagawa = new render.Render().makeElm(area, telop, image)
       wrapper.appendChild(kanagawa)
     }))
     return wrapper
   }
-
   addSlick() {
     const elem = document.querySelector('.wrapper')
 

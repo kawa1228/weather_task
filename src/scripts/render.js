@@ -1,4 +1,4 @@
-export class MakeDisplay {
+export class Render {
     makeElm(area, telop, image) {
         const img = document.createElement('img')
         img.src = image
