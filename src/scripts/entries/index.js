@@ -13,8 +13,8 @@ class Weather {
   }
 
   putData() {
-    const app = document.createElement('div')
-    app.className = 'app'
+    const wrapper = document.createElement('div')
+    wrapper.className = 'wrapper'
 
     //東京
     this.getWeather(130010).then((res => {
@@ -23,7 +23,7 @@ class Weather {
       const image = res.forecasts[0].image.url
 
       const tokyo = new display.MakeDisplay().makeElm(area, telop, image)
-      app.appendChild(tokyo)
+      wrapper.appendChild(tokyo)
     }))
 
     //神奈川
@@ -33,13 +33,13 @@ class Weather {
       const image = res.forecasts[0].image.url
 
       const kanagawa = new display.MakeDisplay().makeElm(area, telop, image)
-      app.appendChild(kanagawa)
+      wrapper.appendChild(kanagawa)
     }))
-    return app
+    return wrapper
   }
 
   addSlick() {
-    const elem = document.querySelector('.app')
+    const elem = document.querySelector('.wrapper')
 
     $(elem).slick({
       arrows: false,
@@ -59,10 +59,10 @@ function process(value) {
   })
 }
 
-const result = document.getElementById('result')
+const app = document.getElementById('app')
 
 process(weather.putData()).then(res => {
-  result.appendChild(res)
+  app.appendChild(res)
   return process(weather.addSlick())
 }).then(adSlick => {
   adSlick

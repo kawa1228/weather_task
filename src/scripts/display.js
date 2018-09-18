@@ -2,6 +2,7 @@ export class MakeDisplay {
     makeElm(area, telop, image) {
         const img = document.createElement('img')
         img.src = image
+        img.className = 'weather-img'
         img.setAttribute('alt', '天気画像')
 
         const p = document.createElement('p')
