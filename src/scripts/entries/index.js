@@ -15,23 +15,22 @@ class Weather {
     const wrapper = document.createElement('div')
     wrapper.className = 'wrapper'
 
+    const getData = (res) => {
+      let area = res.location.prefecture
+      let telop = res.forecasts[0].telop
+      let image = res.forecasts[0].image.url
+
+      return new render.Render().makeElm(area, telop, image)
+    }
     //東京
     this.getWeather(130010).then((res => {
-      const area = res.location.prefecture
-      const telop = res.forecasts[0].telop
-      const image = res.forecasts[0].image.url
-
-      const tokyo = new render.Render().makeElm(area, telop, image)
+      const tokyo = getData(res)
       wrapper.appendChild(tokyo)
     }))
 
     //神奈川
     this.getWeather(140010).then((res => {
-      const area = res.location.prefecture
-      const telop = res.forecasts[0].telop
-      const image = res.forecasts[0].image.url
-
-      const kanagawa = new render.Render().makeElm(area, telop, image)
+      const kanagawa = getData(res)
       wrapper.appendChild(kanagawa)
     }))
     return wrapper
