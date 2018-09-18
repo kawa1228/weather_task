@@ -1,3 +1,10 @@
+/*
+・index.js 各ファイルの実行
+・makeWeather.js 天気情報の作成
+・render.js DOMの生成
+APIはWeather Hacksを利用　http://weather.livedoor.com/weather_hacks/webservice
+*/
+
 import * as makeWeather from './makeWeather'
 const weather = new makeWeather.Weather()
 
